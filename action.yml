@@ -23,9 +23,6 @@ inputs:
     description: Docker build context
     required: false
     default: '.'
-  branch_name:
-    description: The branch name used for tagging. use github.ref_name
-    required: true
 
 runs:
   using: "composite"
@@ -34,7 +31,7 @@ runs:
       uses: mad9000/actions-find-and-replace-string@1
       id: tag_name
       with:
-        source: ${{ inputs.branch_name }}
+        source: ${{ github.ref_name }}
         find: '/'
         replace: '-'
     - name: Build and push Docker image with auto tagging
@@ -44,6 +41,6 @@ runs:
         registry: ${{ inputs.registry }}
         project_id: ${{ inputs.project_id }}
         image_name: ${{ inputs.image_name }}
-        image_tag: latest,${{ steps.tag_name.outputs.result }}
+        image_tag: latest,${{ steps.tag_name.outputs.value }}
         dockerfile: ${{ inputs.dockerfile }}
         context: ${{ inputs.context }}
