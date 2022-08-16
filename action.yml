@@ -34,7 +34,7 @@ runs:
       name: replace slash to dash
       uses: mad9000/actions-find-and-replace-string@1
       with:
-        source: ${{ format('{0}/{1}', github.ref_name, steps.commit.outputs.short) }}
+        source: ${{ format('{0}-{1}', github.ref_name, steps.commit.outputs.short) }}
         find: '/'
         replace: '-'
     - name: Build and push Docker image with auto tagging
