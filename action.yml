@@ -27,11 +27,14 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: replace slash to dash in github.ref_name
+    - id: commit
+      name: output commit hash
+      uses: pr-mpt/actions-commit-hash@v1
+    - id: tag_name
+      name: replace slash to dash
       uses: mad9000/actions-find-and-replace-string@1
-      id: tag_name
       with:
-        source: ${{ github.ref_name }}
+        source: ${{ format('{0}/{1}', github.ref_name, steps.commit.outputs.short) }}
         find: '/'
         replace: '-'
     - name: Build and push Docker image with auto tagging
