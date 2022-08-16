@@ -24,7 +24,7 @@ inputs:
     required: false
     default: '.'
   branch_name:
-    description: The branch name used for tagging. use ${{ github.ref_name }}
+    description: The branch name used for tagging. use github.ref_name
     required: true
 
 runs:
