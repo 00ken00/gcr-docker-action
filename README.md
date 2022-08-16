@@ -8,11 +8,11 @@ Build and push image to GCR with tag: `latest,<branch_name>`
 name: Build and push to GCR
 
 on:
+  pull_request:
+    branches: [ master ]
   push:
     branches:
       - 'releases/**'
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build-and-push-to-gcr:
