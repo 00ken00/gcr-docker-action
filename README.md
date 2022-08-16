@@ -9,7 +9,7 @@ name: Build and push to GCR
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
   push:
     branches:
       - 'releases/**'
