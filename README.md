@@ -1,5 +1,6 @@
 ## gcr-docker-action
 
+Build and push image to GCR with tag: `latest,<branch_name>`
 
 
 ## Example
