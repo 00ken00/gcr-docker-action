@@ -20,10 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build and push to GCR
-        uses: KenExplore/gcr-docker-action@v2.1
+        uses: KenExplore/gcr-docker-action@v2.2
         with:
           gcloud_service_key: ${{ secrets.GCR_CREDENTIALS }}
-          registry: gcr.io
+          registry: asia.gcr.io
           project_id: <project-id>
           image_name: <image-name>
           dockerfile: ./Dockerfile
