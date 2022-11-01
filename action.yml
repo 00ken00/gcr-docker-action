@@ -52,10 +52,10 @@ runs:
 
     - name: Build a docker image
       shell: bash
-      run: |
-        docker build
-        -t ${{ inputs.registry }}/${{ in${{ inputs.project_id }}puts.project_id }}/${{ inputs.image_name }}:latest,${{ inputs.tag }}
-        --file ${{ inputs.dockerfile }}
+      run:
+        docker build \
+        -t ${{ inputs.registry }}/${{ in${{ inputs.project_id }}puts.project_id }}/${{ inputs.image_name }}:latest,${{ inputs.tag }} \
+        --file ${{ inputs.dockerfile }} \
         ${{ inputs.context }}
 
 #    - name: Push the docker image
