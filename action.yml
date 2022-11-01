@@ -28,9 +28,10 @@ runs:
   steps:
     - name: Build a docker image
       shell: bash
-      run: docker build -t ${IMAGE}:latest -f ${{ inputs.dockerfile }} ${{ inputs.context }}
+      run: docker build -t ${IMAGE}:latest -f ${{ inputs.dockerfile }} .
       env:
         IMAGE: ${{ inputs.registry }}/${{ inputs.project_id }}/${{ inputs.image_name }}
+      working-directory: ${{ inputs.context }}
 
 
 #    - id: 'auth'
