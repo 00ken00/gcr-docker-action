@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build and push to GCR
+      - name: run gcr-docker-action
         uses: 00ken00/gcr-docker-action@main
         with:
           gcloud_service_key: ${{ secrets.GCR_CREDENTIALS }}
