@@ -17,4 +17,4 @@ jobs:
           project_id: ***REMOVED***
           image_name: exchange-api
           dockerfile: Dockerfile
-          context: ./.github/workflows
+          context: .github/workflows/
