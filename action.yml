@@ -28,7 +28,7 @@ runs:
   steps:
     - name: Build a docker image
       shell: bash
-      run: docker build -t ${IMAGE}:latest --file ${{ inputs.dockerfile }} ${{ inputs.context }}
+      run: docker build -t ${IMAGE}:latest .
       env:
         IMAGE: ${{ inputs.registry }}/${{ inputs.project_id }}/${{ inputs.image_name }}
 
