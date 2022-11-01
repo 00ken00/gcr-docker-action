@@ -8,6 +8,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Run gcr-docker-action
         uses: 00ken00/gcr-docker-action@main
         with:
