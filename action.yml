@@ -52,7 +52,7 @@ runs:
 
     - name: Build a docker image
       shell: bash
-      run: docker ps
+      run: echo ${{ inputs.registry }}
 
 
 #    - name: Build a docker image
