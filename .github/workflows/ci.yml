@@ -16,5 +16,5 @@ jobs:
           registry: asia.gcr.io
           project_id: ***REMOVED***
           image_name: exchange-api
-          dockerfile: ./Dockerfile
-          context: .
+          dockerfile: Dockerfile
+          context: ./.github/workflows
