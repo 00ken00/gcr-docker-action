@@ -26,34 +26,33 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v0'
-      with:
-        credentials_json: '${{ inputs.gcloud_service_key }}'
-
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v0'
-
-    - name: Configure docker
-      shell: bash
-      run: gcloud auth configure-docker --quiet
-
-    - id: commit
-      name: Output commit hash
-      uses: pr-mpt/actions-commit-hash@v1
-
-    - id: tag_name
-      name: Replace slash to dash
-      uses: mad9000/actions-find-and-replace-string@1
-      with:
-        source: ${{ format('{0}-{1}', github.ref_name, steps.commit.outputs.short) }}
-        find: '/'
-        replace: '-'
-
     - name: Build a docker image
       shell: bash
       run: echo ${{ inputs.registry }}
 
+#    - id: 'auth'
+#      uses: 'google-github-actions/auth@v0'
+#      with:
+#        credentials_json: '${{ inputs.gcloud_service_key }}'
+#
+#    - name: 'Set up Cloud SDK'
+#      uses: 'google-github-actions/setup-gcloud@v0'
+#
+#    - name: Configure docker
+#      shell: bash
+#      run: gcloud auth configure-docker --quiet
+#
+#    - id: commit
+#      name: Output commit hash
+#      uses: pr-mpt/actions-commit-hash@v1
+#
+#    - id: tag_name
+#      name: Replace slash to dash
+#      uses: mad9000/actions-find-and-replace-string@1
+#      with:
+#        source: ${{ format('{0}-{1}', github.ref_name, steps.commit.outputs.short) }}
+#        find: '/'
+#        replace: '-'
 
 #    - name: Build a docker image
 #      shell: bash
@@ -62,15 +61,3 @@ runs:
 #    - name: Push the docker image
 #      shell: bash
 #      run: docker push asia.gcr.io/${{ inputs.project_id }}/sueken:${GITHUB_SHA::7}
-
-#    - name: Build and push Docker image with auto tagging
-#      uses: RafikFarhad/push-to-gcr-github-action@v4.1
-#      with:
-#        gcloud_service_key: ${{ inputs.gcloud_service_key }}
-#        registry: ${{ inputs.registry }}
-#        project_id: ${{ inputs.project_id }}
-#        image_name: ${{ inputs.image_name }}
-#        image_tag: latest,${{ steps.tag_name.outputs.value }}
-#        dockerfile: ${{ inputs.dockerfile }}
-#        context: ${{ inputs.context }}
-#
