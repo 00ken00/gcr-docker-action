@@ -66,4 +66,4 @@ runs:
 
     - name: Push the docker image
       shell: bash
-      run: docker push ${{ steps.image_name.outputs.value }}
+      run: docker push ${{ steps.image_name.outputs.value }} --all-tags
