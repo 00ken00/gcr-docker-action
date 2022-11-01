@@ -44,10 +44,9 @@ runs:
 
     - name: Build a docker image
       shell: bash
-      run: |
-        docker build 
-        -t ${IMAGE}:latest 
-        -t ${IMAGE}:${{ steps.tag_name.outputs.value }} 
+      run: docker build \
+        -t ${IMAGE}:latest \
+        -t ${IMAGE}:${{ steps.tag_name.outputs.value }} \
         -f ${{ inputs.dockerfile }} .
       env:
         IMAGE: ${{ inputs.registry }}/${{ inputs.project_id }}/${{ inputs.image_name }}
