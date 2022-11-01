@@ -12,7 +12,7 @@ jobs:
       - name: Run gcr-docker-action
         uses: 00ken00/gcr-docker-action@main
         with:
-          gcloud_service_key: ${{ secrets.GCR_CREDENTIALS }}
+          gcloud_service_key: ${{ secrets.GCP_CREDENTIALS }}
           registry: asia.gcr.io
           project_id: ***REMOVED***
           image_name: exchange-api

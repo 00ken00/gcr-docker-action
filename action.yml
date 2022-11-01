@@ -26,10 +26,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - id: commit
-      name: output commit hash
-      uses: pr-mpt/actions-commit-hash@v1
-
     - id: 'auth'
       uses: 'google-github-actions/auth@v0'
       with:
@@ -38,17 +34,29 @@ runs:
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v0'
 
-    - name: Use gcloud CLI
+    - name: Configure docker
       shell: bash
       run: gcloud auth configure-docker --quiet
 
+    - id: commit
+      name: Output commit hash
+      uses: pr-mpt/actions-commit-hash@v1
+
     - id: tag_name
-      name: replace slash to dash
+      name: Replace slash to dash
       uses: mad9000/actions-find-and-replace-string@1
       with:
         source: ${{ format('{0}-{1}', github.ref_name, steps.commit.outputs.short) }}
         find: '/'
         replace: '-'
+
+    - name: Build a docker image
+      shell: bash
+      run: docker build -t ${{ inputs.registry }}/${{ inputs.project_id }}/${{ inputs.image_name }}:latest,${{ inputs.tag }} ${{ inputs.context }}
+
+#    - name: Push the docker image
+#      shell: bash
+#      run: docker push asia.gcr.io/${{ inputs.project_id }}/sueken:${GITHUB_SHA::7}
 
 #    - name: Build and push Docker image with auto tagging
 #      uses: RafikFarhad/push-to-gcr-github-action@v4.1
