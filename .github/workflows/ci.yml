@@ -14,7 +14,7 @@ jobs:
         with:
           gcloud_service_key: ${{ secrets.GCP_CREDENTIALS }}
           registry: asia.gcr.io
-          project_id: ***REMOVED***
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
           image_name: gcr-docker-action
           dockerfile: Dockerfile.ci
           context: .github/workflows/
