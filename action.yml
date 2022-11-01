@@ -32,7 +32,11 @@ runs:
 
     - id: output
       shell: bash
-      run: echo "{name}={value}" >> $GITHUB_OUTPUT
+      run: echo "value={value}" >> $GITHUB_OUTPUT
+
+    - name: test output
+      shell: bash
+      run: echo ${{ steps.output.outputs.value }}
 
 #    - id: tag_name
 #      name: Replace slash to dash
