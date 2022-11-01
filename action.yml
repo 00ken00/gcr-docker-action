@@ -26,9 +26,21 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - id: commit
+      name: Output commit hash
+      uses: pr-mpt/actions-commit-hash@v1
+
+    - id: tag_name
+      name: Replace slash to dash
+      uses: mad9000/actions-find-and-replace-string@1
+      with:
+        source: ${{ format('{0}-{1}', github.ref_name, steps.commit.outputs.short) }}
+        find: '/'
+        replace: '-'
+
     - name: Build a docker image
       shell: bash
-      run: docker build -t ${IMAGE}:latest -f ${{ inputs.dockerfile }} .
+      run: docker build -t ${IMAGE}:latest -t ${IMAGE}:${{ steps.tag_name.outputs.value }} -f ${{ inputs.dockerfile }} .
       env:
         IMAGE: ${{ inputs.registry }}/${{ inputs.project_id }}/${{ inputs.image_name }}
       working-directory: ${{ inputs.context }}
@@ -45,18 +57,6 @@ runs:
 #    - name: Configure docker
 #      shell: bash
 #      run: gcloud auth configure-docker --quiet
-#
-#    - id: commit
-#      name: Output commit hash
-#      uses: pr-mpt/actions-commit-hash@v1
-#
-#    - id: tag_name
-#      name: Replace slash to dash
-#      uses: mad9000/actions-find-and-replace-string@1
-#      with:
-#        source: ${{ format('{0}-{1}', github.ref_name, steps.commit.outputs.short) }}
-#        find: '/'
-#        replace: '-'
 
 
 #    - name: Push the docker image
