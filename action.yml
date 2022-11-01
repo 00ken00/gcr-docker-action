@@ -52,18 +52,18 @@ runs:
         IMAGE: ${{ inputs.registry }}/${{ inputs.project_id }}/${{ inputs.image_name }}
       working-directory: ${{ inputs.context }}
 
-#    - id: 'auth'
-#      uses: 'google-github-actions/auth@v0'
-#      with:
-#        credentials_json: '${{ inputs.gcloud_service_key }}'
-#
-#    - name: 'Set up Cloud SDK'
-#      uses: 'google-github-actions/setup-gcloud@v0'
-#
-#    - name: Configure docker
-#      shell: bash
-#      run: gcloud auth configure-docker --quiet
-#
-#    - name: Push the docker image
-#      shell: bash
-#      run: docker push asia.gcr.io/${{ inputs.project_id }}/sueken:${GITHUB_SHA::7}
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ inputs.gcloud_service_key }}'
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+
+    - name: Configure docker
+      shell: bash
+      run: gcloud auth configure-docker --quiet
+
+    - name: Push the docker image
+      shell: bash
+      run: docker push ${{ steps.image_name.outputs.value }}

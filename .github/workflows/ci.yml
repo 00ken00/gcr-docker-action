@@ -15,6 +15,6 @@ jobs:
           gcloud_service_key: ${{ secrets.GCP_CREDENTIALS }}
           registry: asia.gcr.io
           project_id: ***REMOVED***
-          image_name: exchange-api
+          image_name: gcr-docker-action
           dockerfile: Dockerfile.ci
           context: .github/workflows/
