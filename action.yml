@@ -38,15 +38,15 @@ runs:
         find: '/'
         replace: '-'
 
-#    - id: image_name
-#      shell: bash
-#      run: echo value=${{ inputs.registry }}/${{ inputs.project_id }}/${{ inputs.image_name }} >> $GITHUB_OUTPUT
+    - id: image_name
+      shell: bash
+      run: echo value=${{ inputs.registry }}/${{ inputs.project_id }}/${{ inputs.image_name }} >> $GITHUB_OUTPUT
 
     - name: Build a docker image
       shell: bash
       run: "docker build
-        -t ${IMAGE}:latest
-        -t ${IMAGE}:${{ steps.tag_name.outputs.value }}
+        -t ${{ steps.image_name.outputs.value }}:latest
+        -t ${{ steps.image_name.outputs.value }}:${{ steps.tag_name.outputs.value }}
         -f ${{ inputs.dockerfile }} ."
       env:
         IMAGE: ${{ inputs.registry }}/${{ inputs.project_id }}/${{ inputs.image_name }}
