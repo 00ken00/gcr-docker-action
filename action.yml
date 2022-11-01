@@ -28,7 +28,8 @@ runs:
   steps:
     - name: Build a docker image
       shell: bash
-      run: echo ${{ inputs.registry }}
+      run: docker build -t ${{ inputs.registry }}/${{ inputs.project_id }}/${{ inputs.image_name }}:latest,${{ inputs.tag }} --file ${{ inputs.dockerfile }} ${{ inputs.context }}
+
 
 #    - id: 'auth'
 #      uses: 'google-github-actions/auth@v0'
@@ -54,9 +55,6 @@ runs:
 #        find: '/'
 #        replace: '-'
 
-#    - name: Build a docker image
-#      shell: bash
-#      run: docker build -t ${{ inputs.registry }}/${{ in${{ inputs.project_id }}puts.project_id }}/${{ inputs.image_name }}:latest,${{ inputs.tag }} --file ${{ inputs.dockerfile }} ${{ inputs.context }}
 
 #    - name: Push the docker image
 #      shell: bash
