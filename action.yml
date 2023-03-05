@@ -32,7 +32,7 @@ runs:
 
     - id: tag_name
       name: Replace slash to dash
-      uses: mad9000/actions-find-and-replace-string@2
+      uses: mad9000/actions-find-and-replace-string@3
       with:
         source: ${{ format('{0}-{1}', github.ref_name, steps.commit.outputs.short) }}
         find: '/'
