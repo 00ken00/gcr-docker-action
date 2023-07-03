@@ -44,7 +44,7 @@ runs:
 
     - name: Build a docker image
       shell: bash
-      run: "docker build --ssh default
+      run: "DOCKER_BUILDKIT=1 docker build --ssh default
         -t ${{ steps.image_name.outputs.value }}:latest
         -t ${{ steps.image_name.outputs.value }}:${{ steps.tag_name.outputs.value }}
         -f ${{ inputs.dockerfile }} ."
